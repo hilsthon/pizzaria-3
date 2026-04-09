@@ -1,483 +1,206 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pizzaria do Lucas</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizzaria do Lucas</title>
 
-  <style>
-    *{box-sizing:border-box}
-    body {font-family: Arial; margin:0; background:#111; color:#fff}
-    header {background:#c0392b; padding:15px; text-align:center}
+<style>
+*{box-sizing:border-box}
+body {font-family: Arial; margin:0; background:#111; color:#fff}
+header {background:#c0392b; padding:15px; text-align:center}
 
-    .container {
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap:12px;
-      padding:12px;
-      padding-right:320px;
-    }
+.container {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:12px;
+  padding:12px;
+  padding-right:320px;
+}
 
-    .card {background:#222; border-radius:12px; padding:10px}
-    .card img {
-      width:100%;
-      border-radius:10px;
-      height:150px;
-      object-fit:contain;
-      background:#111;
-    }
+.card {background:#222; border-radius:12px; padding:10px}
+.card img {
+  width:100%;
+  border-radius:10px;
+  height:150px;
+  object-fit:contain;
+  background:#111;
+}
 
-    .controls {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-top:8px;
-    }
+.controls {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:8px;
+}
 
-    button {padding:6px 10px; border:none; border-radius:6px; cursor:pointer}
-    .btn {background:#c0392b; color:#fff; width:100%; margin-top:10px}
+button {padding:6px 10px; border:none; border-radius:6px; cursor:pointer}
+.btn {background:#c0392b; color:#fff; width:100%; margin-top:10px}
 
-    .cart {
-      position:fixed;
-      right:0;
-      top:0;
-      width:300px;
-      height:100%;
-      background:#000;
-      padding:12px;
-      overflow:auto;
-      border-left:2px solid #222;
-    }
+.cart {
+  position:fixed;
+  right:0;
+  top:0;
+  width:300px;
+  height:100%;
+  background:#000;
+  padding:12px;
+  overflow:auto;
+  border-left:2px solid #222;
+}
 
-    input, select {
-      width:100%;
-      padding:10px;
-      margin:6px 0;
-      border-radius:6px;
-      border:none;
-    }
+input, select {
+  width:100%;
+  padding:10px;
+  margin:6px 0;
+  border-radius:6px;
+  border:none;
+}
 
-    .erro {border:2px solid red}
+.erro {border:2px solid red}
 
-    @media (max-width: 900px) {
-      .container {padding-right:0;}
-      .cart {
-        width:100%;
-        position:relative;
-        border-left:none;
-        border-top:2px solid #222;
-      }
-    }
-  </style>
+@media (max-width: 900px) {
+  .container {padding-right:0;}
+  .cart {
+    width:100%;
+    position:relative;
+    border-left:none;
+    border-top:2px solid #222;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>Pizzaria do Lucas</h1>
+<h1>Pizzaria do Lucas</h1>
 </header>
 
 <div class="container">
 
-  <!-- PIZZAS -->
-  <div class="card">
-    <img src="images/calabresa-2.png">
-    <h3>Calabresa</h3>
-    <p>R$ 40,00</p>
-    <div class="controls">
-      <button onclick="diminuir('calabresa')">-</button>
-      <span id="calabresa">0</span>
-      <button onclick="aumentar('calabresa')">+</button>
-    </div>
-  </div>
+<!-- PIZZAS -->
+<div class="card"><img src="images/calabresa-2.png"><h3>Calabresa</h3><p>R$ 40</p><div class="controls"><button onclick="diminuir('calabresa')">-</button><span id="calabresa">0</span><button onclick="aumentar('calabresa')">+</button></div></div>
 
-  <div class="card">
-    <img src="images/mussarela.png">
-    <h3>Mussarela</h3>
-    <p>R$ 40,00</p>
-    <div class="controls">
-      <button onclick="diminuir('mussarela')">-</button>
-      <span id="mussarela">0</span>
-      <button onclick="aumentar('mussarela')">+</button>
-    </div>
-  </div>
+<div class="card"><img src="images/mussarela.png"><h3>Mussarela</h3><p>R$ 40</p><div class="controls"><button onclick="diminuir('mussarela')">-</button><span id="mussarela">0</span><button onclick="aumentar('mussarela')">+</button></div></div>
 
-  <div class="card">
-    <img src="images/f-catup.png">
-    <h3>Frango c/ Catupiry</h3>
-    <p>R$ 40,00</p>
-    <div class="controls">
-      <button onclick="diminuir('frango')">-</button>
-      <span id="frango">0</span>
-      <button onclick="aumentar('frango')">+</button>
-    </div>
-  </div>
+<div class="card"><img src="images/f-catup.png"><h3>Frango c/ Catupiry</h3><p>R$ 40</p><div class="controls"><button onclick="diminuir('frango')">-</button><span id="frango">0</span><button onclick="aumentar('frango')">+</button></div></div>
 
-  <div class="card">
-    <img src="images/portuguesa.png">
-    <h3>Portuguesa</h3>
-    <p>R$ 40,00</p>
-    <div class="controls">
-      <button onclick="diminuir('portuguesa')">-</button>
-      <span id="portuguesa">0</span>
-      <button onclick="aumentar('portuguesa')">+</button>
-    </div>
-  </div>
+<div class="card"><img src="images/portuguesa.png"><h3>Portuguesa</h3><p>R$ 40</p><div class="controls"><button onclick="diminuir('portuguesa')">-</button><span id="portuguesa">0</span><button onclick="aumentar('portuguesa')">+</button></div></div>
 
-  <div class="card">
-    <img src="images/4-queijos.png">
-    <h3>4 Queijos</h3>
-    <p>R$ 40,00</p>
-    <div class="controls">
-      <button onclick="diminuir('queijos')">-</button>
-      <span id="queijos">0</span>
-      <button onclick="aumentar('queijos')">+</button>
-    </div>
-  </div>
+<div class="card"><img src="images/4-queijos.png"><h3>4 Queijos</h3><p>R$ 40</p><div class="controls"><button onclick="diminuir('queijos')">-</button><span id="queijos">0</span><button onclick="aumentar('queijos')">+</button></div></div>
 
- <div class="card">
-    <img src="/pizzaria do lucas/images/atum.png">
-    <h3>Atum</h3>
-    <p>R$ 40,00</p>
-    <div class="controls">
-      <button onclick="diminuir('atum')">-</button>
-      <span id="atum">0</span>
-      <button onclick="aumentar('atum')">+</button>
-    </div>
-  </div>
+<div class="card"><img src="images/atum.png"><h3>Atum</h3><p>R$ 40</p><div class="controls"><button onclick="diminuir('atum')">-</button><span id="atum">0</span><button onclick="aumentar('atum')">+</button></div></div>
 
-<div class="card">
-    <img src="images/carne-seca.png">
-    <h3>Carne seca com banana da terra</h3>
-    <p>R$ 65,00</p>
-    <div class="controls">
-      <button onclick="diminuir('carne')">-</button>
-      <span id="carne">0</span>
-      <button onclick="aumentar('carne')">+</button>
-    </div>
-  </div>
+<div class="card"><img src="images/carne-seca.png"><h3>Carne seca</h3><p>R$ 65</p><div class="controls"><button onclick="diminuir('carne')">-</button><span id="carne">0</span><button onclick="aumentar('carne')">+</button></div></div>
 
+<div class="card"><img src="images/salaminho.png"><h3>Salaminho</h3><p>R$ 40</p><div class="controls"><button onclick="diminuir('salaminho')">-</button><span id="salaminho">0</span><button onclick="aumentar('salaminho')">+</button></div></div>
 
-<div class="card">
-    <img src="images/salaminho.png">
-    <h3>Salaminho</h3>
-    <p>R$ 40,00</p>
-    <div class="controls">
-      <button onclick="diminuir('salaminho')">-</button>
-      <span id="salaminho">0</span>
-      <button onclick="aumentar('salaminho')">+</button>
-    </div>
-  </div>
+<div class="card"><img src="images/peito-peru.png"><h3>Peito de peru</h3><p>R$ 40</p><div class="controls"><button onclick="diminuir('peito')">-</button><span id="peito">0</span><button onclick="aumentar('peito')">+</button></div></div>
 
-  
-<div class="card">
-    <img src="images/peito-peru.png">
-    <h3>Peito de peru</h3>
-    <p>R$ 40,00</p>
-    <div class="controls">
-      <button onclick="diminuir('peito')">-</button>
-      <span id="peito">0</span>
-      <button onclick="aumentar('peito')">+</button>
-    </div>
-  </div>
+<div class="card"><img src="images/pizza-de-palmito.png"><h3>Palmito</h3><p>R$ 40</p><div class="controls"><button onclick="diminuir('palmito')">-</button><span id="palmito">0</span><button onclick="aumentar('palmito')">+</button></div></div>
 
+<div class="card"><img src="images/presunto.png"><h3>Presunto</h3><p>R$ 40</p><div class="controls"><button onclick="diminuir('presunto')">-</button><span id="presunto">0</span><button onclick="aumentar('presunto')">+</button></div></div>
 
-<div class="card">
-    <img src="images/pizza-de-palmito.png">
-    <h3>Palmito</h3>
-    <p>R$ 40,00</p>
-    <div class="controls">
-      <button onclick="diminuir('palmito')">-</button>
-      <span id="palmito">0</span>
-      <button onclick="aumentar('palmito')">+</button>
-    </div>
-  </div>
+<div class="card"><img src="images/milho.jpg"><h3>Milho</h3><p>R$ 40</p><div class="controls"><button onclick="diminuir('milho')">-</button><span id="milho">0</span><button onclick="aumentar('milho')">+</button></div></div>
 
+<div class="card"><img src="images/bacon.png"><h3>Da Casa</h3><p>R$ 60</p><div class="controls"><button onclick="diminuir('bacon')">-</button><span id="bacon">0</span><button onclick="aumentar('bacon')">+</button></div></div>
 
-<div class="card">
-    <img src="images/presunto.png">
-    <h3>Presunto</h3>
-    <p>R$ 40,00</p>
-    <div class="controls">
-      <button onclick="diminuir('Presunto')">-</button>
-      <span id="Presunto">0</span>
-      <button onclick="aumentar('Presunto')">+</button>
-    </div>
-  </div>
+<div class="card"><img src="images/camarao.png"><h3>Camarão</h3><p>R$ 65</p><div class="controls"><button onclick="diminuir('camarao')">-</button><span id="camarao">0</span><button onclick="aumentar('camarao')">+</button></div></div>
 
-  
-<div class="card">
-    <img src="images/milho.jpg">
-    <h3>Milho</h3>
-    <p>R$ 40,00</p>
-    <div class="controls">
-      <button onclick="diminuir('milho')">-</button>
-      <span id="milho">0</span>
-      <button onclick="aumentar('milho')">+</button>
-    </div>
-  </div>
+<div class="card"><img src="images/azeitona.png"><h3>Azeitona</h3><p>R$ 65</p><div class="controls"><button onclick="diminuir('azeitona')">-</button><span id="azeitona">0</span><button onclick="aumentar('azeitona')">+</button></div></div>
 
-<div class="card">
-    <img src="images/bacon.png">
-    <h3>Da Casa frango,milho,bacon,cebola e catup.</h3>
-    <p>R$ 60,00</p>
-    <div class="controls">
-      <button onclick="diminuir('bacon')">-</button>
-      <span id="bacon">0</span>
-      <button onclick="aumentar('bacon')">+</button>
-    </div>
-  </div>
+<div class="card"><img src="images/tomate.png"><h3>Rúcula</h3><p>R$ 65</p><div class="controls"><button onclick="diminuir('rucula')">-</button><span id="rucula">0</span><button onclick="aumentar('rucula')">+</button></div></div>
 
-<div class="card">
-    <img src="images/camarao.png">
-    <h3>Camarão</h3>
-    <p>R$ 65,00</p>
-    <div class="controls">
-        <button onclick="diminuir('Camarão')">-</button>
-      <span id="Camarão">0</span>
-      <button onclick="aumentar('Camarão')">+</button>
-    </div>
-  </div>
+<div class="card"><img src="images/prestigio.png"><h3>Prestígio</h3><p>R$ 40</p><div class="controls"><button onclick="diminuir('prestigio')">-</button><span id="prestigio">0</span><button onclick="aumentar('prestigio')">+</button></div></div>
 
+<div class="card"><img src="images/morango.png"><h3>Morango</h3><p>R$ 40</p><div class="controls"><button onclick="diminuir('morango')">-</button><span id="morango">0</span><button onclick="aumentar('morango')">+</button></div></div>
 
-<div class="card">
-    <img src="images/azeitona.png">
-    <h3>Azeitona com Cebola</h3>
-    <p>R$ 65,00</p>
-    <div class="controls">
-        <button onclick="diminuir('azeitona')">-</button>
-      <span id="azeitona">0</span>
-      <button onclick="aumentar('azeitona')">+</button>
-    </div>
-  </div>
+<div class="card"><img src="images/romeu.png"><h3>Romeu e Julieta</h3><p>R$ 40</p><div class="controls"><button onclick="diminuir('romeu')">-</button><span id="romeu">0</span><button onclick="aumentar('romeu')">+</button></div></div>
 
+<div class="card"><img src="images/leite.png"><h3>Banana c/ leite</h3><p>R$ 40</p><div class="controls"><button onclick="diminuir('leite')">-</button><span id="leite">0</span><button onclick="aumentar('leite')">+</button></div></div>
 
+<!-- BEBIDAS -->
+<div class="card"><img src="images/coca-1.png"><h3>Coca 1L</h3><p>R$ 10</p><div class="controls"><button onclick="diminuir('coca')">-</button><span id="coca">0</span><button onclick="aumentar('coca')">+</button></div></div>
 
-<div class="card">
-    <img src="images/tomate.png">
-    <h3>Tomate seco com Rúcula</h3>
-    <p>R$ 65,00</p>
-    <div class="controls">
-        <button onclick="diminuir('rucula')">-</button>
-      <span id="rucula">0</span>
-      <button onclick="aumentar('rucula')">+</button>
-    </div>
-  </div>
-
-
-<div class="card">
-    <img src="images/prestigio.png">
-    <h3>Prestígio com chocolate</h3>
-    <p>R$ 40,00</p>
-    <div class="controls">
-        <button onclick="diminuir('prestigio')">-</button>
-      <span id="prestigio">0</span>
-      <button onclick="aumentar('prestigio')">+</button>
-    </div>
-  </div>
-
-<div class="card">
-    <img src="images/morango.png">
-    <h3>Chocolate c/ Morango</h3>
-    <p>R$ 40,00</p>
-    <div class="controls">
-        <button onclick="diminuir('morango')">-</button>
-      <span id="morango">0</span>
-      <button onclick="aumentar('morango')">+</button>
-    </div>
-  </div>
-
-<div class="card">
-    <img src="images/romeu.png">
-    <h3>Romeu e Julieta</h3>
-    <p>R$ 40,00</p>
-    <div class="controls">
-        <button onclick="diminuir('romeu')">-</button>
-      <span id="romeu">0</span>
-      <button onclick="aumentar('romeu')">+</button>
-    </div>
-  </div>
-
-<div class="card">
-    <img src="images/leite.png">
-    <h3>Banana com leite cond.</h3>
-    <p>R$ 40,00</p>
-    <div class="controls">
-        <button onclick="diminuir('leite')">-</button>
-      <span id="leite">0</span>
-      <button onclick="aumentar('leite')">+</button>
-    </div>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-  <!-- BEBIDAS -->
-  <div class="card">
-    <img src="images/coca-1.png">
-    <h3>Coca-Cola 1L</h3>
-    <p>R$ 10,00</p>
-    <div class="controls">
-      <button onclick="diminuir('coca')">-</button>
-      <span id="coca">0</span>
-      <button onclick="aumentar('coca')">+</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="images/guarana.png">
-    <h3>Guaraná 1L</h3>
-    <p>R$ 10,00</p>
-    <div class="controls">
-      <button onclick="diminuir('guarana')">-</button>
-      <span id="guarana">0</span>
-      <button onclick="aumentar('guarana')">+</button>
-    </div>
-  </div>
+<div class="card"><img src="images/guarana.png"><h3>Guaraná 1L</h3><p>R$ 10</p><div class="controls"><button onclick="diminuir('guarana')">-</button><span id="guarana">0</span><button onclick="aumentar('guarana')">+</button></div></div>
 
 </div>
 
 <div class="cart">
-  <h2>Carrinho</h2>
-  <div id="itens"></div>
+<h2>Carrinho</h2>
+<div id="itens"></div>
 
-  <h3>Nome</h3>
-  <input type="text" id="nome">
+<input type="text" id="nome" placeholder="Nome">
+<input type="text" id="endereco" placeholder="Endereço">
+<input type="text" id="referencia" placeholder="Referência">
 
-  <h3>Endereço e Número do Local</h3>
-  <input type="text" id="endereco">
+<select id="pagamento">
+<option value="">Pagamento</option>
+<option>Dinheiro</option>
+<option>Pix</option>
+<option>Cartão</option>
+</select>
 
-  <h3>Ponto de Referência</h3>
-  <input type="text" id="referencia">
-
-  <h3>Pagamento</h3>
-  <select id="pagamento">
-    <option value="">Selecione</option>
-    <option>Dinheiro</option>
-    <option>Pix</option>
-    <option>Cartão</option>
-  </select>
-
-  <button class="btn" onclick="enviarPedido()">Enviar Pedido</button>
+<button class="btn" onclick="enviarPedido()">Enviar Pedido</button>
 </div>
 
 <script>
 let carrinho = {
-  calabresa:{nome:"Pizza Calabresa",preco:40,qtd:0},
-  mussarela:{nome:"Pizza Mussarela",preco:40,qtd:0},
-  frango:{nome:"Pizza Frango c/ Catupiry",preco:40,qtd:0},
-  portuguesa:{nome:"Pizza Portuguesa",preco:40,qtd:0},
-  queijos:{nome:"Pizza 4 Queijos",preco:40,qtd:0},
-  coca:{nome:"Coca-Cola 1L",preco:10,qtd:0},
-  guarana:{nome:"Guaraná 1L",preco:10,qtd:0},
-   atum:{nome:"Pizza Atum",preco:40,qtd:0},
-   carne:{nome:"carne seca com b. da terra",preco:65,qtd:0},
-   salaminho:{nome:"salaminho",preco:65,qtd:0},
-    peito:{nome:"peito de peru",preco:40,qtd:0},
-      palmito:{nome:"Pizza de Palmito",preco:40,qtd:0},
-      Presunto:{nome:"Pizza de Presunto",preco:40,qtd:0},
-      milho:{nome:"Pizza de Milho",preco:40,qtd:0},
-      bacon:{nome:"Pizza da Casa",preco:60,qtd:0},
-      Camarão:{nome:"Pizza de Camarão",preco:65,qtd:0},
-      azeitona:{nome:"Pizza de azeitona c/ cebola",preco:65,qtd:0},
-      rucula:{nome:"Pizza de Tomate seco c/ Rúcula",preco:65,qtd:0},
-      prestigio:{nome:"Pizza de prestígio c/ chocol.",preco:40,qtd:0},
-      morango:{nome:"Pizza de Chocolate C/ Morango",preco:40,qtd:0},
-      romeu:{nome:"Pizza Romeu e Julieta",preco:40,qtd:0},
-      leite:{nome:"Pizza Banana c/ leite cond.",preco:40,qtd:0},
-      
+calabresa:{nome:"Calabresa",preco:40,qtd:0},
+mussarela:{nome:"Mussarela",preco:40,qtd:0},
+frango:{nome:"Frango",preco:40,qtd:0},
+portuguesa:{nome:"Portuguesa",preco:40,qtd:0},
+queijos:{nome:"4 Queijos",preco:40,qtd:0},
+atum:{nome:"Atum",preco:40,qtd:0},
+carne:{nome:"Carne seca",preco:65,qtd:0},
+salaminho:{nome:"Salaminho",preco:40,qtd:0},
+peito:{nome:"Peito de peru",preco:40,qtd:0},
+palmito:{nome:"Palmito",preco:40,qtd:0},
+presunto:{nome:"Presunto",preco:40,qtd:0},
+milho:{nome:"Milho",preco:40,qtd:0},
+bacon:{nome:"Da Casa",preco:60,qtd:0},
+camarao:{nome:"Camarão",preco:65,qtd:0},
+azeitona:{nome:"Azeitona",preco:65,qtd:0},
+rucula:{nome:"Rúcula",preco:65,qtd:0},
+prestigio:{nome:"Prestígio",preco:40,qtd:0},
+morango:{nome:"Morango",preco:40,qtd:0},
+romeu:{nome:"Romeu",preco:40,qtd:0},
+leite:{nome:"Leite",preco:40,qtd:0},
+coca:{nome:"Coca",preco:10,qtd:0},
+guarana:{nome:"Guaraná",preco:10,qtd:0}
 };
 
-function aumentar(item){
-  carrinho[item].qtd++;
-  atualizar();
-}
-
-function diminuir(item){
-  if(carrinho[item].qtd > 0){
-    carrinho[item].qtd--;
-    atualizar();
-  }
-}
+function aumentar(i){carrinho[i].qtd++; atualizar();}
+function diminuir(i){if(carrinho[i].qtd>0){carrinho[i].qtd--; atualizar();}}
 
 function atualizar(){
-  let lista = "";
-  let total = 0;
-
-  for(let item in carrinho){
-    let p = carrinho[item];
-    document.getElementById(item).innerText = p.qtd;
-
-    if(p.qtd > 0){
-      lista += `${p.nome} x${p.qtd}<br>`;
-      total += p.qtd * p.preco;
-    }
-  }
-
-  lista += `<br><strong>Total: R$ ${total}</strong>`;
-  document.getElementById('itens').innerHTML = lista;
+let total=0, lista="";
+for(let i in carrinho){
+let p=carrinho[i];
+document.getElementById(i).innerText=p.qtd;
+if(p.qtd>0){lista+=`${p.nome} x${p.qtd}<br>`; total+=p.qtd*p.preco;}
+}
+lista+=`<br><strong>Total: R$ ${total}</strong>`;
+document.getElementById("itens").innerHTML=lista;
 }
 
 function enviarPedido(){
-  let nome = document.getElementById('nome');
-  let endereco = document.getElementById('endereco');
-  let referencia = document.getElementById('referencia');
-  let pagamento = document.getElementById('pagamento');
+let nome=document.getElementById("nome").value;
+let endereco=document.getElementById("endereco").value;
+let referencia=document.getElementById("referencia").value;
+let pagamento=document.getElementById("pagamento").value;
 
-  let erro = false;
+let msg=`Pedido:%0A Nome: ${nome}%0A`;
+let total=0;
 
-  [nome,endereco,referencia,pagamento].forEach(campo=>{
-    if(campo.value.trim()===""){
-      campo.classList.add("erro");
-      erro=true;
-    }else{
-      campo.classList.remove("erro");
-    }
-  });
+for(let i in carrinho){
+let p=carrinho[i];
+if(p.qtd>0){msg+=`${p.nome} x${p.qtd}%0A`; total+=p.qtd*p.preco;}
+}
 
-  let temItem=false;
-  for(let item in carrinho){
-    if(carrinho[item].qtd>0){
-      temItem=true;
-    }
-  }
-
-  if(!temItem){
-    alert("Adicione pelo menos um item!");
-    return;
-  }
-
-  if(erro){
-    alert("Preencha todos os campos!");
-    return;
-  }
-
-  let mensagem=`Pedido:%0A`;
-  mensagem+=`Nome: ${nome.value}%0A%0A`;
-
-  let total=0;
-
-  for(let item in carrinho){
-    let p=carrinho[item];
-    if(p.qtd>0){
-      mensagem+=`${p.nome} x${p.qtd}%0A`;
-      total+=p.qtd*p.preco;
-    }
-  }
-
-  mensagem+=`%0ATotal: R$ ${total}%0A`;
-  mensagem+=`Endereço: ${endereco.value}%0A`;
-  mensagem+=`Referência: ${referencia.value}%0A`;
-  mensagem+=`Pagamento: ${pagamento.value}`;
-
-  window.open(`https://wa.me/5573999883212?text=${mensagem}`);
+msg+=`Total: R$ ${total}%0AEndereço: ${endereco}%0ARef: ${referencia}%0APagamento: ${pagamento}`;
+window.open(`https://wa.me/5573999883212?text=${msg}`);
 }
 </script>
 
